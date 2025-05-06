@@ -1,0 +1,19 @@
+<p-toolbar
+  [style]="{ 'border-radius': '3rem', padding: '.5rem 2rem 0.5rem 2rem ' }">
+  <ng-template #start>
+    <div class="flex items-center gap-2">
+      <!-- <img src="assets/images/logo/logo-color.svg" alt="logo" class="w-30" /> -->
+      <img src="assets/images/logo/logowecare.png" alt="logo" class="w-15" />
+    </div>
+  </ng-template>
+  <ng-template #end>
+    <div class="flex items-center gap-4">
+      <!-- <p-button label="Share" severity="contrast" size="small" /> -->
+      <p-button icon="pi pi-bell" severity="warn" [rounded]="true" [raised]="true" [outlined]="true" />
+      <p-avatar
+        [image]="user().image"
+        [style]="{ width: '40px', height: '40px'  }"
+        [shape]="'circle'" />
+    </div>
+  </ng-template>
+</p-toolbar>
