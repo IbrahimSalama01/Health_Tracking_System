@@ -1,0 +1,37 @@
+<section class="hero-section w-full py-8 sm:py-10 md:py-12 lg:py-16 mt-5 md:my-12 bg-white">
+  <div class="carousel-header">
+    <h1 class="carousel-title">Track Your Health</h1>
+    <p class="carousel-subtitle">Stay informed. Stay healthy.</p>
+  </div>
+  <div class="seperator"></div>
+
+  <p-carousel
+    [value]="images"
+    [numVisible]="1"
+    [numScroll]="1"
+    styleClass="custom-carousel"
+    [responsiveOptions]="responsiveOptions"
+    [autoplayInterval]="5000"
+    [circular]="true"
+    [showNavigators]="false"
+  >
+
+  <ng-template let-image pTemplate="item">
+    <div class="carousel-item">
+
+      <img
+      [src]="image['src']"
+      alt="Carousel Image"
+      class="carousel-img"
+    />
+
+      <div class="carousel-caption">
+        <h2>{{ image.title }}</h2>
+        <p>{{ image.subtitle }}</p>
+      </div>
+
+
+    </div>
+  </ng-template>
+  </p-carousel>
+</section>

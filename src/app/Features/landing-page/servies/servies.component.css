@@ -1,0 +1,120 @@
+.container{
+  width: 80%;
+  margin: auto;
+  margin-top: 10vh;
+}
+.section-header {
+  text-align: center;
+  margin-bottom: 60px;
+
+}
+
+.section-title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: var(--main-color);
+  margin: 0;
+
+}
+
+
+
+.section-description {
+  color: var(--font-second);
+  margin-bottom: 10px;
+  font-size: 1.2rem;
+  font-weight: 500;
+  margin-bottom: 20px;
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+
+  padding: 10px;
+  min-width: 100%;
+  border-radius: 20px;
+  margin: auto;
+  padding: 20px;
+  gap: 2rem;
+}
+
+
+
+
+:host ::ng-deep .service-card {
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  overflow: hidden;
+  background-color: white;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  display: -webkit-box;
+  text-overflow: ellipsis;
+  height: 40vh;
+
+}
+
+
+:host ::ng-deep .service-card:hover {
+  transform: translateY(-10px);
+
+}
+
+:host ::ng-deep .service-card .p-card-body {
+  padding: 1.5rem;
+}
+
+:host ::ng-deep .service-card .p-card-content {
+  padding: 0;
+}
+
+.card-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px 0 10px;
+}
+
+:host ::ng-deep .service-avatar {
+  width: 60px !important;
+  height: 60px !important;
+  font-size: 1.5rem !important;
+  font-weight: bold;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease;
+}
+
+
+
+.card-title {
+  margin-top: 15px;
+  color: var(--main-color);
+  font-weight: 500;
+  font-size: 1.5rem;
+  transition: color 0.3s ease;
+}
+
+
+.card-text {
+  text-align: center;
+  color: #666;
+  line-height: 1.6;
+
+}
+
+.animated {
+  animation: fadeInUp 0.8s ease-out;
+}
+
+.separator{
+  width: 40%;
+  height: 4px;
+  background-color: green;
+  margin: auto;
+  margin-bottom: 20px;
+  display: block;
+  box-sizing: border-box;
+
+}

@@ -1,0 +1,217 @@
+.page-content {
+  flex-grow: 1;
+  padding: 50px;
+  text-align: center;
+  color: #555;
+}
+
+.wave-container {
+  position: relative;
+  height: 150px;
+}
+
+.wave {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120' preserveAspectRatio='none'%3E%3Cpath d='M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V120h-1200z' fill='%232c3e50'%3E%3C/path%3E%3C/svg%3E");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.footer {
+  background-color: #2c3e50;
+  color: #ecf0f1;
+  padding: 0;
+  width: 100%;
+}
+
+.footer-top {
+  background-color: #1abc9c;
+  padding: 15px 0;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.footer-top::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -10px;
+  width: 100%;
+  height: 20px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 30' preserveAspectRatio='none'%3E%3Cpath d='M0,0V10c30,12.98,100,20,150,15c150.65-14.96,300-40,450,0c50,15,150,5,200,0c150.65-14.96,300-20,400,5V0z' fill='%231abc9c'%3E%3C/path%3E%3C/svg%3E");
+  background-size: cover;
+}
+
+.footer-top h3 {
+  font-size: 22px;
+  margin-bottom: 10px;
+}
+
+.footer-top p {
+  font-size: 16px;
+  margin-bottom: 15px;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.contact-btn {
+  display: inline-block;
+  background-color: #fff;
+  color: #1abc9c;
+  padding: 10px 30px;
+  border-radius: 25px;
+  font-weight: bold;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  position: relative;
+  z-index: 5;
+}
+
+.contact-btn:hover {
+  background-color: #2c3e50;
+  color: #fff;
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.footer-main {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 50px 5%;
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.footer-col {
+  flex-basis: 22%;
+  min-width: 220px;
+  margin-bottom: 30px;
+}
+
+.footer-col h4 {
+  font-size: 18px;
+  margin-bottom: 20px;
+  position: relative;
+  padding-bottom: 10px;
+}
+
+.footer-col h4::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 50px;
+  height: 2px;
+  background-color: #1abc9c;
+}
+
+.footer-col ul {
+  list-style: none;
+}
+
+.footer-col ul li {
+  margin-bottom: 12px;
+}
+
+.footer-col ul li a {
+  color: #bdc3c7;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.footer-col ul li a:hover {
+  color: #1abc9c;
+  padding-left: 5px;
+}
+
+.contact-info p {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 15px;
+  color: #bdc3c7;
+  font-size: 14px;
+}
+
+.icon {
+  min-width: 16px;
+  margin-right: 10px;
+  color: #1abc9c;
+}
+
+.social-links {
+  display: flex;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.social-links a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: #34495e;
+  color: #ecf0f1;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.social-links a:hover {
+  background-color: #1abc9c;
+  transform: translateY(-3px);
+}
+
+.footer-bottom {
+  background-color: #243342;
+  padding: 20px 0;
+  text-align: center;
+  font-size: 14px;
+  color: #7f8c8d;
+}
+
+
+
+.inner-wave {
+  position: relative;
+  height: 30px;
+  overflow: hidden;
+  background: #2c3e50;
+}
+
+.inner-wave::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 30' preserveAspectRatio='none'%3E%3Cpath d='M0,30V20c100,12.98,300,20,500,10C700,20,900,0,1200,20v10H0z' fill='%23243342'%3E%3C/path%3E%3C/svg%3E");
+  background-size: cover;
+}
+
+@media (max-width: 768px) {
+  .footer-col {
+      flex-basis: 45%;
+  }
+  .wave-container {
+      height: 100px;
+  }
+}
+
+@media (max-width: 576px) {
+  .footer-col {
+      flex-basis: 100%;
+  }
+  .wave-container {
+      height: 70px;
+  }
+}
