@@ -1,1 +1,15 @@
-<p>my-doctors works!</p>
+<!-- <p>my-doctors works!</p> -->
+<p-tabs value="accessed-doctors" routerLinkActive="active">
+  <p-tablist>
+    @for (tab of tabs; track tab.route) {
+      <p-tab
+        [value]="tab.route"
+        [routerLink]="tab.route"
+        class="flex items-center !gap-2 text-inherit">
+        <i [class]="tab.icon"></i>
+        <span>{{ tab.label }}</span>
+      </p-tab>
+    }
+  </p-tablist>
+</p-tabs>
+<router-outlet> </router-outlet>
