@@ -1,0 +1,145 @@
+:root {
+  --image-height: 180px;
+  --image-max-height: 240px;
+}
+.hero-section{
+margin-top: 10vh;
+width: 100%;
+
+}
+.container-hero {
+  margin: auto;
+}
+.hero-text{
+  margin-left:5vw ;
+
+}
+.seperator {
+  width: 40%;
+  height: 4px;
+  background-color: green;
+  margin: auto;
+  margin-bottom: 20px;
+  display: block;
+  box-sizing: border-box;
+}
+
+
+
+.nav-buttons{
+  margin-top: 5vh;
+
+}
+.btn1{
+  background: var(--main-color);
+}
+.btn2{
+  background-color: rgb(0, 179, 0);
+}
+.data{
+  color: var(--main-color);
+}
+
+.carousel-item {
+  position: relative;
+  overflow: hidden;
+  border-radius: 12px;
+
+
+}
+
+.carousel-item img {
+  width: 80%;
+    height: var(--image-height);
+  display: block;
+  border-radius: 12px;
+  position: relative;
+  left:10% ;
+  z-index: 1;
+  padding: 1rem;
+  max-height: var(--image-max-height);
+  object-fit: cover;
+  object-position: top center;
+  max-height: 70vh;
+
+
+
+}
+.carousel-item::before {
+  content: '';
+
+  position: absolute;
+  top: 0;
+  left: 10%;
+  height: 100%;
+  width: 80%;
+
+  background:  rgba(0, 0, 0, 0.5);
+
+  z-index: 2;
+  pointer-events: none;
+}
+
+
+.carousel-caption {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 3;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  color: white;
+  text-align: center;
+  padding: 1rem;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
+}
+
+.carousel-caption h2 {
+  font-size: 3rem;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.carousel-caption p {
+  font-size: 1.3rem;
+  margin: 0;
+
+}
+
+.carousel-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.carousel-title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: var(--main-color);
+  margin: 0;
+}
+
+.carousel-subtitle {
+  font-size: 1.2rem;
+  color: var(--font-second);
+  font-weight: 500;
+  margin: 0;
+}
+
+
+
+
+
+@media (min-width: 600px) { :root { --image-height: 200px; } }
+@media (min-width: 900px) { :root { --image-height: 240px; } }
+@media (min-width: 1200px) { :root { --image-height: 240px; } }
+@media (min-width: 1400px) { :root { --image-height: 240px; } }
+@media (min-width: 1600px) {
+  :root {
+    --image-height: m(240px);
+  }
+}

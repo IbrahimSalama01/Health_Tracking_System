@@ -1,0 +1,19 @@
+@import "tailwindcss";
+
+
+*{
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root{
+  --main-color : #0776d6;
+  --text-color: #111 ;
+  --light-text:#272727a2 ;
+  --font-second:#222;
+  --bg-light:rgb(247,247,247)
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

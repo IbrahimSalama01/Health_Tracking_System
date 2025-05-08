@@ -1,0 +1,48 @@
+<section class="py-20 bg-gradient-to-b from-gray-50 to-white">
+  <div class="carousel-container">
+    <h2 class="carousel-title">
+      Meet Our <span class="highlight">Specialists</span>
+    </h2>
+    <p class="subtitle">Skilled doctors, focused on you.</p>
+    <div class="seperator "></div>
+    <p-carousel
+      [value]="doctors"
+      [circular]="true"
+      [autoplayInterval]="6000"
+      styleClass="custom-carousel"
+      [responsiveOptions]="responsiveOptions"
+      [numVisible]="3"
+      [numScroll]="1"
+    >
+      <ng-template pTemplate="item" let-doctor>
+        <p-card [styleClass]="'doctor-card'">
+          <ng-template pTemplate="header">
+            <div class="card-image-container">
+              <img [src]="doctor.img" [alt]="doctor.name" class="card-image" />
+              <div class="overlay">
+                <p-tag
+                  [value]="doctor.name"
+                  severity="info"
+                  class="doctor-name-tag"
+                ></p-tag>
+              </div>
+            </div>
+          </ng-template>
+
+          <div class="card-body">
+            
+            <h3 class="specialty">{{ doctor.specialty }}</h3>
+            <p class="experience">{{ doctor.experience }}</p>
+            <p class="bio">{{ doctor.bio }}</p>
+            <button
+              pButton
+              label="Book Appointment"
+              class="book-button"
+            ></button>
+          </div>
+        </p-card>
+
+      </ng-template>
+    </p-carousel>
+  </div>
+</section>

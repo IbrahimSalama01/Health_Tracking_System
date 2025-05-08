@@ -1,0 +1,41 @@
+
+
+
+
+
+
+
+
+.slugn {
+  color: rgba(42, 106, 141, 0.851) !important;
+  margin-right: 50px ;
+}
+    :host ::ng-deep .custom-menubar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      background-color: #50c878;
+      border: 0;
+      border-radius: 0px 0px 10px 10px;
+      box-shadow: -10px 10px 10px rgba(0, 0, 0, 0.192),10px -10px 10px rgba(0, 0, 0, 0.192) ;
+    }
+
+    :host ::ng-deep .custom-menubar .p-menubar-root-list > .p-menuitem > .p-menuitem-link:hover {
+      background-color: rgba(139, 74, 74, 0.9);
+    }
+
+    :host ::ng-deep .custom-signin-btn .p-button {
+      background-color: #2b8b05;
+
+      color: white;
+
+    }
+    :host ::ng-deep .custom-signup-btn .p-button{
+      color: black;
+      background-color: white;
+    } 
+
+
+
