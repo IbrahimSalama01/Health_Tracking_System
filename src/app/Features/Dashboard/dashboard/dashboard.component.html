@@ -1,9 +1,14 @@
-<div class="h-full flex gap-2">
+
+<div class="min-h-full flex gap-2">
   <app-sidebar [sidenavItems]="items"></app-sidebar>
-  <div class="h-full flex-grow">
-    <div class="h-full flex flex-col ms-4 me-6 mt-6 ">
-      <app-dashboad-navbar [user]="user"></app-dashboad-navbar>
+  <div class="h-screen z-10 overflow-y-auto">
+    <div class="h-full flex flex-col gap-2  ">
+      <div class="ms-4 me-6 mt-6">
+        <app-dashboad-navbar app-dashboad-navbar [user]="user"></app-dashboad-navbar>
+      </div>
+      <div class="">
       <router-outlet></router-outlet>
+    </div>
     </div>
   </div>
 </div>
