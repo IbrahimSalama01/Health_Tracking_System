@@ -1,1 +1,55 @@
-<p>contact-us works!</p>
+
+<section class="contacts">
+
+  <p-toast position="top-left" key="tl"></p-toast>
+          <div class="info">
+          <h1> Contact US</h1>
+          <div class="seperator"></div>
+          <div class="form-content">
+              <form [formGroup]="contactForm" (ngSubmit)="onSubmit()"  action="" method="post">
+                <div>
+                  <label>Name </label>
+                  <input type="text"
+                    pInputText
+                    placeholder="Enter your name"
+                    formControlName ="name"
+                    >
+                </div>
+                <div>
+                  <label>Email </label>
+                  <input type="email"
+                  pInputText
+                  placeholder="Enter your email"
+                  formControlName ="email"
+                  >
+                </div>
+
+                <div>
+                  <label>Phone</label>
+                  <input type="tel"
+                  pInputText
+                  placeholder="Enter your phone"
+                  formControlName ="phone"
+                  >
+                </div>
+
+                <div>
+                  <label>Subject</label>
+                  <input type="text"
+                  pInputText
+                  placeholder="Enter your subject"
+                  formControlName ="subject"
+                  >
+                </div>
+                <div>
+                  <label>Message</label>
+                  <textarea rows="4" cols="35"  placeholder="Enter your message" pInputTextarea formControlName="message"></textarea>
+                </div>
+                <div class="btn">
+                  <button pButton type="submit" label="Send" [disabled]="!contactForm.valid"></button>
+
+                </div>
+              </form>
+            </div>
+          </div>
+</section>

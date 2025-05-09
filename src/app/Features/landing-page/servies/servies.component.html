@@ -1,0 +1,28 @@
+<section class="services-section">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">Our Services</h2>
+      <p class="section-description">Monitor patient status, location, and medical progress in real-time.</p>
+      <div class="separator"></div>
+    </div>
+
+
+    <div class="services-grid">
+      @for(service of services; track service.label) {
+        <p-card styleClass="service-card animated">
+          <ng-template pTemplate="header">
+            <div class="card-header">
+              <p-avatar [label]="service.label"
+                       shape="circle"
+                       styleClass="service-avatar"
+                       [style]="avatarStyle"></p-avatar>
+              <h3 class="card-title">{{ service.title }}</h3>
+            </div>
+          </ng-template>
+
+          <p class="card-text">{{ service.description }}</p>
+        </p-card>
+      }
+    </div>
+  </div>
+</section>
