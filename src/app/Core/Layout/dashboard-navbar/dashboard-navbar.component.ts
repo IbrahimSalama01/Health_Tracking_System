@@ -9,8 +9,8 @@ import { user } from '../../../utils/Interfaces';
 @Component({
   selector: 'app-dashboad-navbar',
   imports: [ToolbarModule,ButtonModule, AvatarModule,IconFieldModule,InputIconModule],
-  templateUrl: './dashboad-navbar.component.html',
-  styleUrl: './dashboad-navbar.component.css'
+  templateUrl: './dashboard-navbar.component.html',
+  styleUrl: './dashboard-navbar.component.css'
 })
 export class DashboadNavbarComponent {
   user = input.required<user>()
