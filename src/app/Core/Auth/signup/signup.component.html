@@ -10,7 +10,7 @@
       <div class="md:col-span-2">
         <h2 class="text-xl font-semibold text-gray-700 border-b pb-2 mb-4">Personal Information</h2>
       </div>
-      
+
       <div>
         <label class="block text-sm font-medium text-gray-700 mb-1">First Name *</label>
         <input pInputText formControlName="firstName" class="w-full" placeholder="John" />
@@ -18,7 +18,7 @@
           <small class="text-red-500 block mt-1">Valid first name is required</small>
         }
       </div>
-      
+
       <div>
         <label class="block text-sm font-medium text-gray-700 mb-1">Last Name *</label>
         <input pInputText formControlName="lastName" class="w-full" placeholder="Doe" />
@@ -34,7 +34,7 @@
           <small class="text-red-500 block mt-1">Valid email is required</small>
         }
       </div>
-      
+
       <div>
         <label class="block text-sm font-medium text-gray-700 mb-1">National ID *</label>
         <input pInputText formControlName="nationalId" class="w-full" placeholder="12345678901234" />
@@ -50,10 +50,10 @@
           <small class="text-red-500 block mt-1">Valid Egyptian phone number is required</small>
         }
       </div>
-      
+
       <div>
         <label class="block text-sm font-medium text-gray-700 mb-1">Date of Birth</label>
-        <p-datePicker 
+        <p-datePicker
           formControlName="dateOfBirth"
           [showIcon]="true"
           inputId="birthdate"
@@ -63,7 +63,7 @@
           placeholder="Select date">
         </p-datePicker>
       </div>
-      
+
       <!-- Account Information -->
       <div class="md:col-span-2 mt-4">
         <h2 class="text-xl font-semibold text-gray-700 border-b pb-2 mb-4">Account Information</h2>
@@ -76,12 +76,12 @@
           <small class="text-red-500 block mt-1">Please select a role</small>
         }
       </div>
-      
+
       <div>
         <label class="block text-sm font-medium text-gray-700 mb-1">Profile Image</label>
-        <p-fileUpload 
-          mode="basic" 
-          name="profileImage" 
+        <p-fileUpload
+          mode="basic"
+          name="profileImage"
           accept="image/*"
           (onSelect)="onImageUpload($event)"
           chooseLabel="Choose Image"
@@ -100,7 +100,7 @@
 
         <div class="md:col-span-2">
           <label class="block text-sm font-medium text-gray-700 mb-1">Specialization *</label>
-          <p-dropdown [options]="specializations" formControlName="doctorInfo.specialization" optionLabel="label" optionValue="value" 
+          <p-dropdown [options]="specializations" formControlName="doctorInfo.specialization" optionLabel="label" optionValue="value"
                       placeholder="Select Specialization" class="w-full"></p-dropdown>
           @if (form.get('doctorInfo.specialization')?.invalid && form.get('doctorInfo.specialization')?.touched) {
             <small class="text-red-500 block mt-1">Specialization is required</small>
@@ -109,7 +109,7 @@
 
         <div class="md:col-span-2">
           <label class="block text-sm font-medium text-gray-700 mb-1">Bio *</label>
-          <textarea pInputTextarea formControlName="doctorInfo.bio" class="w-full" rows="3" 
+          <textarea pInputTextarea formControlName="doctorInfo.bio" class="w-full" rows="3"
                     placeholder="Tell us about your professional background"></textarea>
           @if (form.get('doctorInfo.bio')?.invalid && form.get('doctorInfo.bio')?.touched) {
             <small class="text-red-500 block mt-1">Bio is required</small>
@@ -118,7 +118,7 @@
 
         <div>
           <label class="block text-sm font-medium text-gray-700 mb-1">Years of Experience *</label>
-          <p-inputNumber formControlName="doctorInfo.experience" mode="decimal" [showButtons]="true" class="w-full" 
+          <p-inputNumber formControlName="doctorInfo.experience" mode="decimal" [showButtons]="true" class="w-full"
                         placeholder="Enter years"></p-inputNumber>
           @if (form.get('doctorInfo.experience')?.invalid && form.get('doctorInfo.experience')?.touched) {
             <small class="text-red-500 block mt-1">Experience is required</small>
@@ -133,17 +133,17 @@
           <label class="block text-sm font-medium text-gray-700 mb-1">Street</label>
           <input pInputText formControlName="doctorInfo.clinicAddress.street" class="w-full" placeholder="Clinic street" />
         </div>
-        
+
         <div>
           <label class="block text-sm font-medium text-gray-700 mb-1">City</label>
           <input pInputText formControlName="doctorInfo.clinicAddress.city" class="w-full" placeholder="Clinic city" />
         </div>
-        
+
         <div>
           <label class="block text-sm font-medium text-gray-700 mb-1">State</label>
           <input pInputText formControlName="doctorInfo.clinicAddress.state" class="w-full" placeholder="Clinic state" />
         </div>
-        
+
         <div>
           <label class="block text-sm font-medium text-gray-700 mb-1">Country</label>
           <input pInputText formControlName="doctorInfo.clinicAddress.country" class="w-full" placeholder="Clinic country" />
@@ -151,9 +151,9 @@
 
         <div class="md:col-span-2 mt-4">
           <h3 class="text-lg font-semibold text-gray-700 mb-2">Certificates *</h3>
-          <button pButton type="button" icon="pi pi-plus" label="Add Certificate" 
+          <button pButton type="button" icon="pi pi-plus" label="Add Certificate"
                   class="p-button-sm" (click)="addCertificate()"></button>
-          
+
           @for (cert of certificates.controls; track cert; let i = $index) {
             <div class="mt-4 space-y-4">
               <div class="p-4 border rounded-lg">
@@ -162,7 +162,7 @@
                   <button pButton type="button" icon="pi pi-times" class="p-button-rounded p-button-danger p-button-text"
                           (click)="removeCertificate(i)"></button>
                 </div>
-                
+
                 <div class="mb-3">
                   <label class="block text-sm font-medium text-gray-700 mb-1">Certificate Name *</label>
                   <!-- <textarea pInputTextarea [formControl]="getCertificateControl(i).get('name')" class="w-full" placeholder="Certificate name"></textarea> -->
@@ -170,12 +170,12 @@
                     <small class="text-red-500 block mt-1">Certificate name is required</small>
                   }
                 </div>
-                
+
                 <div>
                   <label class="block text-sm font-medium text-gray-700 mb-1">Certificate Copy *</label>
-                  <p-fileUpload 
-                    mode="basic" 
-                    name="certificateCopy" 
+                  <p-fileUpload
+                    mode="basic"
+                    name="certificateCopy"
                     accept="image/*,.pdf"
                     (onSelect)="onCertificateUpload($event, i)"
                     chooseLabel="Upload Certificate"
@@ -203,17 +203,17 @@
         <label class="block text-sm font-medium text-gray-700 mb-1">Street</label>
         <input pInputText formControlName="street" class="w-full" placeholder="123 Main St" />
       </div>
-      
+
       <div>
         <label class="block text-sm font-medium text-gray-700 mb-1">City</label>
         <input pInputText formControlName="city" class="w-full" placeholder="Cairo" />
       </div>
-      
+
       <div>
         <label class="block text-sm font-medium text-gray-700 mb-1">State</label>
         <input pInputText formControlName="state" class="w-full" placeholder="Cairo" />
       </div>
-      
+
       <div>
         <label class="block text-sm font-medium text-gray-700 mb-1">Country</label>
         <input pInputText formControlName="country" class="w-full" placeholder="Egypt" />
@@ -226,16 +226,16 @@
 
       <div>
         <label class="block text-sm font-medium text-gray-700 mb-1">Password *</label>
-        <p-password formControlName="password" [toggleMask]="true" [feedback]="true" class="w-full" 
+        <p-password formControlName="password" [toggleMask]="true" [feedback]="true" class="w-full"
                    placeholder="••••••••" inputStyleClass="w-full"></p-password>
         @if (form.get('password')?.invalid && form.get('password')?.touched) {
           <small class="text-red-500 block mt-1">Minimum 8 chars with uppercase, lowercase and number</small>
         }
       </div>
-      
+
       <div>
         <label class="block text-sm font-medium text-gray-700 mb-1">Confirm Password *</label>
-        <p-password formControlName="confirmPassword" [toggleMask]="true" class="w-full" 
+        <p-password formControlName="confirmPassword" [toggleMask]="true" class="w-full"
                    placeholder="••••••••" inputStyleClass="w-full"></p-password>
         @if (form.get('confirmPassword')?.invalid && form.get('confirmPassword')?.touched) {
           <small class="text-red-500 block mt-1">Passwords must match</small>
@@ -254,12 +254,12 @@
       }
 
       <div class="md:col-span-2 mt-2">
-        <button pButton type="submit" label="Create Account" icon="pi pi-user-plus" 
+        <button pButton type="submit" label="Create Account" icon="pi pi-user-plus"
                 class="w-full bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700"></button>
       </div>
 
       <div class="md:col-span-2 text-center text-sm text-gray-600 mt-4">
-        Already have an account? 
+        Already have an account?
         <a routerLink="/login" class="text-teal-600 hover:underline font-medium">Sign In</a>
       </div>
     </form>

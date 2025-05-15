@@ -13,9 +13,9 @@ import { FileUploadModule } from 'primeng/fileupload';
 import { MessageModule } from 'primeng/message';
 import { DropdownModule } from 'primeng/dropdown';
 import { InputNumberModule } from 'primeng/inputnumber';
-
+import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth/auth.service';
-
+import { inject } from '@angular/core';
 @Component({
   selector: 'app-signup',
   standalone: true,
@@ -39,7 +39,7 @@ import { AuthService } from '../../services/auth/auth.service';
 })
 export class SignupComponent {
   constructor(private authService: AuthService) {}
-
+  private router = inject(Router);
   form: FormGroup = new FormGroup({
     firstName: new FormControl('', [Validators.required, Validators.pattern(/^[a-zA-Z]+$/)]),
     lastName: new FormControl('', [Validators.required, Validators.pattern(/^[a-zA-Z]+$/)]),
@@ -50,7 +50,7 @@ export class SignupComponent {
     role: new FormControl(null, Validators.required),
     password: new FormControl('', [
       Validators.required,
-      Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@])[a-zA-Z\d@]{8,}$/)
+      Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/)
     ]),
     confirmPassword: new FormControl('', Validators.required),
     street: new FormControl(''),
@@ -120,7 +120,7 @@ export class SignupComponent {
     if (file) {
       const certificateGroup = this.certificates.at(index) as FormGroup;
       certificateGroup.patchValue({ copy: file });
-      
+
       const reader = new FileReader();
       reader.onload = () => {
         this.certificatePreviews[index] = reader.result as string;
@@ -178,6 +178,7 @@ export class SignupComponent {
       next: (response) => {
         console.log('Registration successful:', response);
         // Optionally, redirect the user or show a success message
+        this.router.navigate(['/login']);
       },
       error: (err) => {
         console.error('Registration failed:', err);
