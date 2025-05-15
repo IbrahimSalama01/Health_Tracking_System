@@ -4,14 +4,24 @@ export interface sidenavItem {
   route: string;
 }
 export interface user {
-  id: string;
-  name: string;
+  _id: string;
+  firstName: string;
+  lastName: string;
+  nationalId: string;
   email: string;
-  type: string;
-  gender: string;
-  address: { city: string; country: string };
-  image: string;
+  emailVerified: boolean;
+  phone: string[]; // Array of phone numbers
+  phoneVerified: boolean;
+  profileImage: string;
+  role: "patient" | "admin" | "doctor" ;
+  currentlyActive: boolean;
+  createdAt: string; // ISO timestamp
+  updatedAt: string; // ISO timestamp
+  mailVerificationTokenExpires: string; // ISO timestamp
+  __v: number;
 }
+
+
 /*************** User interfaces **************/
 export interface Address {
   street: string;
@@ -53,21 +63,21 @@ export interface User {
 
 /*************** Patient interfaces **************/
 export interface Certification {
-  certificateName: String;
+  certificateName: string;
   date: Date;
 }
 
 export interface Doctor {
-  _id?: String;
-  userId?: String;
-  name: String;
+  _id?: string;
+  userId?: string;
+  name: string;
   specialization: string;
   certifications: Certification[];
   licenseNumber?: number;
   rating?: number;
   experienceYears?: number;
   bio: string;
-  patients?: String[];
+  patients?: string[];
   profileImage: string; // temp
 }
 
@@ -121,5 +131,5 @@ export interface Prescription {
 export interface Thread {
   _id?: string; // MongoDB ObjectId as string
   createdBy: string; // User ID
-  name: String;
+  name: string;
 }
