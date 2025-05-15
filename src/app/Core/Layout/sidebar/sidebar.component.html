@@ -1,13 +1,7 @@
-<<<<<<< HEAD
 <div
-  class="sticky-top flex flex-col h-full rounded-e-xl justify-center bg-emerald-500 items-center w-16 hover:w-52 duration-300 overflow-y-auto"
+  class="sticky-top flex flex-col h-full rounded-e-xl justify-center bg-emerald-400 items-center overflow-y-auto"
   (mouseover)="hover = true"
   (mouseleave)="hover = false">
-=======
-<div class="flex flex-col h-full ovrerflow-y-hidden rounded-e-xl justify-center bg-emerald-500 items-center  w-16 hover:w-52 duration-300 overflow-x-hidden "
-  (mouseover)="hover = true" (mouseleave)="hover = false">
-
->>>>>>> 9a1d9c5aab1cafd65d4654934821603f5e7464c8
   @for (item of sidenavItems(); track $index) {
     <app-side-bar-item
       [item]="item"

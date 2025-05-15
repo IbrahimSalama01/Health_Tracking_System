@@ -1,14 +1,14 @@
 <div class="h-screen flex overflow-hidden">
   <!-- Sidebar -->
-  <div class="sticky top-0 h-screen overflow-y-auto">
+  <div class="sticky top-0 h-screen w-16 hover:w-52 transition-all duration-300">
     <app-sidebar [sidenavItems]="items"></app-sidebar>
   </div>
 
   <!-- Main content area -->
-  <div class="flex-1 flex flex-col">
+  <div class="flex-1 flex flex-col duration-300">
     <!-- Sticky Navbar -->
-    <div class="sticky top-0 z-20 bg-transparent  px-4 py-2">
-      <app-dashboad-navbar [user]="user"></app-dashboad-navbar>
+    <div class="sticky top-0 z-20 bg-transparent px-4 py-2">
+      <app-dashboard-navbar [user]="user"></app-dashboard-navbar>
     </div>
 
     <!-- Scrollable content under navbar -->
