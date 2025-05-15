@@ -1,9 +1,29 @@
 import { Routes } from '@angular/router';
 import { LandingPageComponent } from './Features/landing-page/landing-page.component';
+import { MainLayoutComponent } from './Core/Layout/main-layout/main-layout.component';
 
 export const routes: Routes = [
 
-  { path: '', component: LandingPageComponent 
+  { path: '', component: MainLayoutComponent, children: [
+    {
+      path: '',
+      component: LandingPageComponent
+    },
+    {
+      path: 'contact-us',
+      loadComponent: () =>
+        import('./Features/contact-us/contact-us.component').then(
+          c => c.ContactUsComponent
+        ),
+    },
+    {
+      path: 'privacy-policy',
+      loadComponent: () =>
+        import('./Features/privacy-policy/privacy-policy.component').then(
+          c => c.PrivacyPolicyComponent
+        ),
+    },
+  ]
   },
   {
     path: 'signup',
@@ -22,20 +42,6 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./Core/Auth/forgot-password/forgot-password.component').then(
         c => c.ForgotPasswordComponent)
-  },
-  {
-    path: 'contact-us',
-    loadComponent: () =>
-      import('./Features/contact-us/contact-us.component').then(
-        c => c.ContactUsComponent
-      ),
-  },
-  {
-    path: 'privacy-policy',
-    loadComponent: () =>
-      import('./Features/privacy-policy/privacy-policy.component').then(
-        c => c.PrivacyPolicyComponent
-      ),
   },
   {
     path: 'dashboard',
