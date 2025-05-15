@@ -1,7 +1,10 @@
 import { Routes } from '@angular/router';
 import { LandingPageComponent } from './Features/landing-page/landing-page.component';
 import { MainLayoutComponent } from './Core/Layout/main-layout/main-layout.component';
-
+import { authGuard } from './Core/Auth/auth.guard';
+import { patientGuard } from './Features/Dashboard/Patient/patient.guard';
+import { doctorGuard } from './Features/Dashboard/Doctor/doctor.guard';
+import { loggedInGuard } from './Core/Auth/logged-in.guard';
 export const routes: Routes = [
 
   { path: '', component: MainLayoutComponent, children: [
@@ -29,19 +32,22 @@ export const routes: Routes = [
     path: 'signup',
     loadComponent: () =>
       import('./Core/Auth/signup/signup.component').then(
-        c => c.SignupComponent)
+        c => c.SignupComponent),
+        canActivate:[loggedInGuard]
   },
   {
     path: 'login',
     loadComponent: () =>
       import('./Core/Auth/login/login.component').then(
-        c => c.LoginComponent)
+        c => c.LoginComponent),
+        canActivate:[loggedInGuard]
   },
   {
     path: 'forgot-password',
     loadComponent: () =>
       import('./Core/Auth/forgot-password/forgot-password.component').then(
-        c => c.ForgotPasswordComponent)
+        c => c.ForgotPasswordComponent),
+        canActivate:[loggedInGuard]
   },
   {
     path: 'dashboard',
@@ -49,6 +55,7 @@ export const routes: Routes = [
       import('./Features/Dashboard/dashboard/dashboard.component').then(
         c => c.DashboardComponent
       ),
+    canActivate: [authGuard,patientGuard],
     children: [
       {
         path: '',
