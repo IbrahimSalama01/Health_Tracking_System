@@ -7,6 +7,10 @@ import { InputTextModule } from 'primeng/inputtext';
 import { PasswordModule } from 'primeng/password';
 import { ButtonModule } from 'primeng/button';
 
+import { AuthService } from '../../services/auth/auth.service';
+import { Router } from '@angular/router';
+
+
 @Component({
   selector: 'app-login',
   standalone: true,
@@ -22,17 +26,41 @@ import { ButtonModule } from 'primeng/button';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
+
+    constructor(
+    private authService: AuthService,
+    private router: Router
+  ) {}
+
   form: FormGroup = new FormGroup({
     login: new FormControl('', [Validators.required]),
     password: new FormControl('', [Validators.required])
   });
 
   submitLogin() {
-    if (this.form.valid) {
-      console.log('Logging in with:', this.form.value);
-      // API
-    } else {
-      this.form.markAllAsTouched();
-    }
+  if (this.form.valid) {
+    const credentials = this.form.value;
+
+    this.authService.login(credentials).subscribe({
+      next: (response) => {
+        console.log('Login successful:', response);
+
+        // Example: Store token if provided
+        if (response.token) {
+          localStorage.setItem('authToken', response.token);
+        }
+
+        // Redirect to dashboard or home page
+        this.router.navigate(['/dashboard']);
+      },
+      error: (err) => {
+        console.error('Login failed:', err);
+        // Optionally show error message in the UI
+      }
+    });
+  } else {
+    this.form.markAllAsTouched();
   }
+}
+
 }
