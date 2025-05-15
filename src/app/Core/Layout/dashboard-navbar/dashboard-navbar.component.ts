@@ -7,11 +7,11 @@ import { InputIconModule } from 'primeng/inputicon';
 import { user } from '../../../utils/Interfaces';
 
 @Component({
-  selector: 'app-dashboad-navbar',
+  selector: 'app-dashboard-navbar',
   imports: [ToolbarModule,ButtonModule, AvatarModule,IconFieldModule,InputIconModule],
   templateUrl: './dashboard-navbar.component.html',
   styleUrl: './dashboard-navbar.component.css'
 })
-export class DashboadNavbarComponent {
+export class DashboardNavbarComponent {
   user = input.required<user>()
 }

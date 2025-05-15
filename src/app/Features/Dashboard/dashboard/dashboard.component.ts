@@ -2,10 +2,10 @@ import { Component } from '@angular/core';
 import { SidebarComponent } from '../../../Core/Layout/sidebar/sidebar.component';
 import { sidenavItem } from '../../../utils/Interfaces';
 import { RouterOutlet } from '@angular/router';
-import { DashboadNavbarComponent } from '../../../Core/Layout/dashboard-navbar/dashboard-navbar.component';
+import { DashboardNavbarComponent } from '../../../Core/Layout/dashboard-navbar/dashboard-navbar.component';
 @Component({
   selector: 'app-dashboard',
-  imports: [SidebarComponent, RouterOutlet,DashboadNavbarComponent],
+  imports: [SidebarComponent, RouterOutlet,DashboardNavbarComponent],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css'
 })
