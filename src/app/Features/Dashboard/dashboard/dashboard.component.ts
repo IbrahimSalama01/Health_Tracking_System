@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { SidebarComponent } from '../../../Core/Layout/sidebar/sidebar.component';
-import { sidenavItem } from '../../../utils/Interfaces';
+import { sidenavItem, user } from '../../../utils/Interfaces';
 import { RouterOutlet } from '@angular/router';
 import { DashboardNavbarComponent } from '../../../Core/Layout/dashboard-navbar/dashboard-navbar.component';
+import { AuthService } from '../../../Core/services/auth/auth.service';
 @Component({
   selector: 'app-dashboard',
   imports: [SidebarComponent, RouterOutlet,DashboardNavbarComponent],
@@ -11,11 +12,13 @@ import { DashboardNavbarComponent } from '../../../Core/Layout/dashboard-navbar/
 })
 export class DashboardComponent {
   items!: sidenavItem[]
-  userType = 'patient'
-  user= {id:"1",name:"Ibrahim Salama", email:"qXV0n@example.com",type:"patient",gender:"male",address:{city:"cairo",country:"egypt"},
-    image:"https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=580&q=80" }
-  constructor() {
-    if (this.userType == 'patient') {
+  user!:user
+
+constructor(private authService: AuthService) {
+    this.authService.user$.subscribe((user: user|null) => {
+      this.user = user!;
+    })
+    if (this.user.role == 'patient') {
       this.items = [
         { name: 'Dashboard', icon: 'pi pi-chart-pie', route: '/dashboard' },
         { name: 'Checkups', icon: 'pi pi-inbox', route: 'checkups' },
