@@ -1,6 +1,6 @@
 
 <div class="menubar-wrapper">
-  <p-menubar [model]="items"  styleClass="custom-menubar">
+  <p-menubar [model]="items"  styleClass="custom-menubar bg-emerald-400!" >
     <ng-template pTemplate="start">
       <div class="slugn flex items-center-safe ">
         <img [src]="logoImg" alt="Logo" class="h-15 w-20 gap-0" />
@@ -10,8 +10,8 @@
 
     <ng-template pTemplate="end">
       <div class="flex gap-3 pr-3">
-        <p-button label="Register" [rounded]="true" severity="contrast"  class="custom-signup-btn" />
-        <p-button label="Login" [rounded]="true" severity="success"  class="custom-signin-btn"/>
+        <p-button label="Register" [rounded]="true"   severity="info"  />
+        <p-button label="Login" [rounded]="true"    severity="secondary"  />
       </div>
     </ng-template>
   </p-menubar>

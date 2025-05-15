@@ -26,10 +26,10 @@ export class NavbarComponent implements OnInit {
         {label: 'Services',routerLink:'/services',  routerLinkActiveOptions: { exact: true }},
         {label: 'Contacts',routerLink:'/contacts',}
       ];
-      console.log('Menu items:', this.items);
+      // console.log('Menu items:', this.items);
     }
     ngOnDestroy(): void {
-      console.log('NavbarComponent destroyed');
+      // console.log('NavbarComponent destroyed');
     }
 
 }
