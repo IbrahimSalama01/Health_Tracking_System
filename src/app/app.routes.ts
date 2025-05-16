@@ -69,6 +69,22 @@ export const routes: Routes = [
       },
       {
         path: 'checkups',
+        children: [
+          {
+            path: 'my-checkups',
+            loadComponent: () =>
+              import(
+                './Features/Dashboard/Patient/checkups/my-checkups/my-checkups.component'
+              ).then(c => c.MyCheckupsComponent),
+          },
+          {
+            path: 'doctors-checkups',
+            loadComponent: () =>
+              import(
+                './Features/Dashboard/Patient/checkups/doctors-checkups/doctors-checkups.component'
+              ).then(c => c.DoctorsCheckupsComponent),
+          },
+        ],
         loadComponent: () =>
           import(
             './Features/Dashboard/Patient/checkups/checkups.component'
@@ -104,6 +120,7 @@ export const routes: Routes = [
           },
         ],
       },
+<<<<<<< HEAD
       {
         path: 'doctor',
         children: [
@@ -138,6 +155,30 @@ export const routes: Routes = [
           }
         ],
       },
+=======
+      //   {
+      // path: 'doctor',
+      // children: [
+      //   {
+      //     path: '',
+      //     loadComponent: () =>
+      //       import('./Features/Dashboard/Doctor/statistics/statistics.component').then(c => c.StatisticsComponent),
+      //   },
+      //   {
+      //     path: 'current-patients',
+      //     loadComponent: () =>
+      //       import('./Features/Dashboard/Doctor/current-patients/current-patients.component').then(c => c.CurrentPatientsComponent),
+      //     canActivate: [doctorGuard],
+      //   },
+      //   {
+      //     path: 'patientdetails/:id',
+      //     loadComponent: () =>
+      //       import('./Features/Dashboard/Doctor/patient-details/patient-details/patient-details.component').then(c => c.PatientDetailsComponent),
+      //   }import { MyCheckupsComponent } from './Features/Dashboard/Patient/checkups/my-checkups/my-checkups.component';
+
+      // ]
+      // },
+>>>>>>> 72527b1c6056c66b7704b4a73317aa905b9232ce
     ],
   },
 ];
