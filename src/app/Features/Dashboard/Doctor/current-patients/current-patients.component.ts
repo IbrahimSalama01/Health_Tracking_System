@@ -1,5 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { PatientService } from '../../../../Core/services/auth/patient.service';
+import { DoctorService } from '../services/doctor.service';
 import { PatientCardComponent } from './patient-card/patient-card/patient-card.component';
 
 @Component({
@@ -10,7 +10,7 @@ import { PatientCardComponent } from './patient-card/patient-card/patient-card.c
 })
 export class CurrentPatientsComponent implements OnInit {
   patients = <any> []
-  private patientService = inject(PatientService)
+  private patientService = inject(DoctorService)
   ngOnInit(){
     this.getDoctorPatients();
   }
