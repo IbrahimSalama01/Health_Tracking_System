@@ -1,0 +1,24 @@
+<div class="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+@for (patient of patients(); track patient._id){
+    <p-card [style]="{ width: '22rem', overflow: 'hidden' }">
+      <ng-template #title>
+        {{ patient?.userId?.firstName }} {{ patient?.userId?.lastName }}
+      </ng-template>
+
+      <ng-template #subtitle>
+        Contact: {{ patient?.userId?.phone?.[0] }}
+      </ng-template>
+
+      <p class="mt-2">Blood Type: {{ patient?.bloodType }}</p>
+      <p>Height: {{ patient?.height }} cm</p>
+      <p>Weight: {{ patient?.weight }} kg</p>
+
+      <ng-template #footer>
+        <div class="flex gap-2 mt-3">
+          <p-button label="New Checkup" icon="pi pi-plus" styleClass="w-full" />
+          <p-button (click) = "viewPatient(patient._id)" label="View profile" icon="pi pi-eye" styleClass="w-full p-button-info" />
+        </div>
+      </ng-template>
+    </p-card>
+  }
+</div>

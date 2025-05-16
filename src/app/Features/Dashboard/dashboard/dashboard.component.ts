@@ -25,5 +25,11 @@ constructor(private authService: AuthService) {
         { name: 'My Doctors', icon: 'pi pi-users', route: 'my-doctors' },
       ]
     }
+    if (this.user.role == 'doctor') {
+      this.items = [
+        { name: 'Dashboard', icon: 'pi pi-chart-pie', route: '/dashboard/doctor' },
+        { name: 'My Patients', icon: 'pi pi-users', route: '/dashboard/doctor/current-patients' },
+      ]
+    }
   }
 }

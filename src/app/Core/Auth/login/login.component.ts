@@ -46,7 +46,11 @@ export class LoginComponent {
         console.log('Login successful:', response);
 
         // Redirect to dashboard or home page
-        this.router.navigate(['/dashboard']);
+        if(response.user.role == 'patient'){
+          this.router.navigate(['/dashboard']);}
+        else if(response.user.role == 'doctor'){
+          this.router.navigate(['/dashboard/doctor']);
+        }
       },
       error: (err) => {
         console.error('Login failed:', err);
