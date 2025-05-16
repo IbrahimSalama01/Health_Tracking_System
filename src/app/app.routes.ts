@@ -101,6 +101,27 @@ export const routes: Routes = [
           },
         ],
       },
+      {
+    path: 'doctor',
+    children: [
+      {
+        path: '',
+        loadComponent: () =>
+          import('./Features/Dashboard/Doctor/statistics/statistics.component').then(c => c.StatisticsComponent),
+      },
+      {
+        path: 'current-patients',
+        loadComponent: () =>
+          import('./Features/Dashboard/Doctor/current-patients/current-patients.component').then(c => c.CurrentPatientsComponent),
+        canActivate: [doctorGuard],
+      },
+      {
+        path: 'patientdetails/:id',
+        loadComponent: () =>
+          import('./Features/Dashboard/Doctor/patient-details/patient-details/patient-details.component').then(c => c.PatientDetailsComponent),
+      }
+    ]
+    },
     ],
   },
 ];
