@@ -1,66 +1,16 @@
-<app-add-checkup></app-add-checkup>
-<div class="flex flex-col gap-6 p-6 rounded-md">
-  @for (checkup of checkups; track $index) {
-    <p-card
-      [header]="'Checkup - ' + checkup.specialization"
-      [subheader]="checkup.type"
-      class="w-full shadow-md rounded-lg">
-      <div class="text-sm space-y-3">
-        <div class="flex justify-between">
-          <div><strong>Date:</strong> {{ checkup.checkupDate }}</div>
-          <div><strong>Created By:</strong> {{ checkup.createdBy }}</div>
-        </div>
+<!-- <app-add-checkup></app-add-checkup> -->
 
-        <div><strong>Thread:</strong> {{ checkup.threadId }}</div>
-
-        @if (checkup.symptoms?.length) {
-          <div>
-            <strong>Symptoms:</strong>
-            <ul class="list-disc list-inside ml-4">
-              @for (symptom of checkup.symptoms; track $index) {
-                <li>{{ symptom }}</li>
-              }
-            </ul>
-          </div>
-        }
-
-        @if (checkup.doctorSigns?.length) {
-          <div>
-            <strong>Doctor Signs:</strong>
-            <ul class="list-disc list-inside ml-4">
-              @for (sign of checkup.doctorSigns; track $index) {
-                <li>{{ sign }}</li>
-              }
-            </ul>
-          </div>
-        }
-
-        @if (checkup.diagnosis) {
-          <div><strong>Diagnosis:</strong> {{ checkup.diagnosis }}</div>
-        }
-
-        @if (checkup.doctorRecommendations) {
-          <div>
-            <strong>Recommendations:</strong>
-            {{ checkup.doctorRecommendations }}
-          </div>
-        }
-
-        @if (checkup.followup?.needed) {
-          <div
-            class="bg-yellow-100 p-2 rounded text-yellow-800 border-l-4 border-yellow-400">
-            <strong>Follow-up:</strong> {{ checkup.followup?.date }} -
-            <strong>Attended:</strong>
-            {{ checkup.followup?.attended ? 'Yes' : 'No' }}
-          </div>
-        }
-
-        <div
-          class="flex justify-between text-xs text-gray-500 pt-4 border-t mt-4">
-          <span><strong>Created:</strong> {{ checkup.createdAt }}</span>
-          <span><strong>Updated:</strong> {{ checkup.updatedAt }}</span>
-        </div>
-      </div>
-    </p-card>
-  }
-</div>
+<p-tabs value="accessed-doctors" routerLinkActive="active">
+  <p-tablist>
+    @for (tab of tabs; track tab.route) {
+      <p-tab
+        [value]="tab.route"
+        [routerLink]="tab.route"
+        class="flex items-center !gap-2 text-inherit">
+        <i [class]="tab.icon"></i>
+        <span>{{ tab.label }}</span>
+      </p-tab>
+    }
+  </p-tablist>
+</p-tabs>
+<router-outlet> </router-outlet>
