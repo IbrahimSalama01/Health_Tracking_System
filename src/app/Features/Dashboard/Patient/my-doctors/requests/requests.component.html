@@ -4,14 +4,14 @@
       <div class="flex flex-col md:flex-row">
         <!-- Left: Image -->
         <img
-          [src]="doctor.profileImage"
+          [src]="doctor.user.profileImage"
           alt="Doctor"
           class="w-full md:w-52 h-52 object-cover rounded-md md:rounded-l-md md:rounded-r-none" />
 
         <!-- Right: Text content -->
         <div class="flex flex-col justify-between p-4 flex-1">
           <div>
-            <h2 class="text-xl font-bold">{{ doctor.name }}</h2>
+            <h2 class="text-xl font-bold">{{ doctor.user.firstName }}</h2>
             <p class="text-sm text-gray-600">{{ doctor.specialization }}</p>
             <p class="mt-2 text-sm text-gray-700 line-clamp-4">
               {{ doctor.bio }}

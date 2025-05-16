@@ -68,17 +68,18 @@ export interface Certification {
 }
 
 export interface Doctor {
-  _id?: string;
-  userId?: string;
-  name: string;
-  specialization: string;
-  certifications: Certification[];
-  licenseNumber?: number;
-  rating?: number;
-  experienceYears?: number;
-  bio: string;
-  patients?: string[];
-  profileImage: string; // temp
+    id:string
+    specialization: string;
+    clinicAddress: string;
+    bio: string;
+    experience: number;
+    user: {
+    firstName: string;
+    lastName: string;
+    email: string;
+    phone: string;
+    profileImage: string;
+    }
 }
 
 /****************** Checkups *****************/

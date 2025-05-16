@@ -14,6 +14,7 @@ export const loggedInGuard: CanActivateFn = async (route, state) => {
     if(currentUser.role == 'doctor')
       return router.createUrlTree(['/dashboard/doctor']);
     else
+      
       return router.createUrlTree(['/dashboard']);
   } else {
     return true;
