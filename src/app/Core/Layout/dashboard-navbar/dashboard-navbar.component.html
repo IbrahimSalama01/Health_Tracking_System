@@ -9,10 +9,15 @@
   <ng-template #end>
     <div class="flex items-center gap-4">
       <!-- <p-button label="Share" severity="contrast" size="small" /> -->
-      <p-button icon="pi pi-bell" severity="warn" [rounded]="true" [raised]="true" [outlined]="true" />
+      <p-button
+        icon="pi pi-bell"
+        severity="warn"
+        [rounded]="true"
+        [raised]="true"
+        [outlined]="true" />
       <p-avatar
         [image]="user().profileImage"
-        [style]="{ width: '40px', height: '40px'  }"
+        [style]="{ width: '40px', height: '40px' }"
         [shape]="'circle'" />
     </div>
   </ng-template>

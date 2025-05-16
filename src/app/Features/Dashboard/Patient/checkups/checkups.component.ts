@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { Checkup } from './../../../../utils/Interfaces';
 import { CardModule } from 'primeng/card';
+import { AddCheckupComponent } from './add-checkup/add-checkup.component';
 
 @Component({
   selector: 'app-checkups',
-  imports: [CardModule],
+  imports: [CardModule, AddCheckupComponent],
   templateUrl: './checkups.component.html',
   styleUrl: './checkups.component.css',
 })

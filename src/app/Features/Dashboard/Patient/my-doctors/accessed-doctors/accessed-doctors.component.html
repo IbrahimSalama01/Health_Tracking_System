@@ -5,9 +5,9 @@
   @for (doctor of doctors; track $index) {
     <p-card [style]="{ width: '25rem', overflow: 'hidden' }">
       <ng-template #header>
-        <img alt="Card" class="w-full" [src]="doctor.profileImage" />
+        <img alt="Card" class="w-full" [src]="doctor.user.profileImage" />
       </ng-template>
-      <ng-template #title> {{ doctor.name }} </ng-template>
+      <ng-template #title> {{ doctor.user.firstName }} </ng-template>
       <ng-template #subtitle> {{ doctor.specialization }} </ng-template>
       <p>
         {{ doctor.bio }}
