@@ -2,7 +2,7 @@
 <!-- <p>requests works!</p> -->
 <!-- <p>my-doctors works!</p> -->
 <div class="flex gap-4 p-4 rounded-md">
-  @for (doctor of doctors; track $index) {
+  @for (doctor of doctors(); track $index) {
     <p-card [style]="{ width: '25rem', overflow: 'hidden' }">
       <ng-template #header>
         <img alt="Card" class="w-full" [src]="doctor.user.profileImage" />
