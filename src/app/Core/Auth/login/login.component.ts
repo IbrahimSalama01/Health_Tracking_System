@@ -45,11 +45,6 @@ export class LoginComponent {
       next: (response) => {
         console.log('Login successful:', response);
 
-        // Example: Store token if provided
-        if (response.token) {
-          localStorage.setItem('authToken', response.token);
-        }
-
         // Redirect to dashboard or home page
         this.router.navigate(['/dashboard']);
       },
