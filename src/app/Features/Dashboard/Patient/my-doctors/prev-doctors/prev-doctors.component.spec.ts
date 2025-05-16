@@ -5,7 +5,7 @@ import { PrevDoctorsComponent } from './prev-doctors.component';
 describe('PrevDoctorsComponent', () => {
   let component: PrevDoctorsComponent;
   let fixture: ComponentFixture<PrevDoctorsComponent>;
-
+  
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [PrevDoctorsComponent]
