@@ -151,6 +151,13 @@ export const routes: Routes = [
               import(
                 './Features/Dashboard/Doctor/new-checkup/new-checkup.component'
               ).then(c => c.NewCheckupComponent),
+          },
+          {
+            path: 'checkups',
+            loadComponent: () =>
+              import(
+                './Features/Dashboard/Doctor/checkups/checkups/checkups.component'
+              ).then(c => c.CheckupsComponent),
           }
         ],
       },

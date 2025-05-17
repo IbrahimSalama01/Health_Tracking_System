@@ -29,6 +29,7 @@ constructor(private authService: AuthService) {
       this.items = [
         { name: 'Dashboard', icon: 'pi pi-chart-pie', route: '/dashboard/doctor' },
         { name: 'My Patients', icon: 'pi pi-users', route: '/dashboard/doctor/current-patients' },
+        { name: 'Checkups', icon: 'pi pi-folder-open', route: '/dashboard/doctor/checkups' },
       ]
     }
   }
