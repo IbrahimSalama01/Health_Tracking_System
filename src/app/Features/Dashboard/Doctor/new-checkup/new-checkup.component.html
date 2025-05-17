@@ -1,0 +1,50 @@
+<div class="p-6 max-w-4xl mx-auto bg-blue-50 rounded-lg shadow-md">
+  <h1 class="text-2xl font-bold mb-6 text-gray-800">New Checkup</h1>
+
+  <form [formGroup]="checkupForm" (ngSubmit)="submit()" class="space-y-6">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div>
+        <label for="type" class="block mb-2 font-medium text-gray-700">Checkup Type</label>
+        <p-dropdown inputId="type" formControlName="type" [options]="types" placeholder="Select Type" styleClass="w-full"></p-dropdown>
+      </div>
+      <div>
+        <label for="checkupDate" class="block mb-2 font-medium text-gray-700">Checkup Date</label>
+        <p-calendar inputId="checkupDate" formControlName="checkupDate" [showTime]="true" [showIcon]="true" hourFormat="24" styleClass="w-full"></p-calendar>
+      </div>
+    </div>
+
+    <div>
+      <label class="block mb-2 font-medium text-gray-700">Specialization</label>
+      <app-specialization formControlName="specialization"></app-specialization>
+      @if (checkupForm.get('specialization')?.invalid && checkupForm.get('specialization')?.touched) {
+        <small class="text-red-500 block mt-1">Specialization is required</small>
+      }
+    </div>
+
+    <div>
+      <label for="symptoms" class="block mb-2 font-medium text-gray-700">Symptoms</label>
+      <p-chips inputId="symptoms" formControlName="symptoms" placeholder="Enter symptoms" styleClass="w-full" [addOnBlur]="true"></p-chips>
+    </div>
+    
+    <div>
+      <label for="doctorSigns" class="block mb-2 font-medium text-gray-700">Doctor Signs</label>
+      <p-chips inputId="doctorSigns" formControlName="doctorSigns" placeholder="Enter doctor signs" styleClass="w-full" [addOnBlur]="true"></p-chips>
+    </div>
+
+    <div>
+      <label for="diagnosis" class="block mb-2 font-medium text-gray-700">Diagnosis</label>
+      <textarea pInputTextarea id="diagnosis" formControlName="diagnosis" rows="3" class="w-full" placeholder="Diagnosis"></textarea>
+    </div>
+    
+    <div>
+      <label for="doctorRecommendations" class="block mb-2 font-medium text-gray-700">Doctor Recommendations</label>
+      <textarea pInputTextarea id="doctorRecommendations" formControlName="doctorRecommendations" rows="3" class="w-full" placeholder="Doctor Recommendations"></textarea>
+    </div>
+    
+    <div class="flex justify-end">
+      <p-button type="submit" [disabled]="checkupForm.invalid" label="Submit" icon="pi pi-check"></p-button>
+    </div>
+  </form>
+
+  <p-toast></p-toast>
+</div>

@@ -1,7 +1,9 @@
 <p-dropdown 
-  [options]="specializations" 
-  formControlName="specialization"
-  optionLabel="name" 
-  optionValue="_id" 
-  placeholder="Select Specialization">
+  [options]="specializations"
+  [ngModel]="value"
+  (onChange)="onValueChange($event.value)"
+  optionLabel="name"
+  optionValue="_id"
+  placeholder="Select Specialization"
+  class="w-full">
 </p-dropdown>
