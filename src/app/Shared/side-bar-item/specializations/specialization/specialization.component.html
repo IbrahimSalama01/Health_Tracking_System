@@ -1,0 +1,9 @@
+<p-dropdown 
+  [options]="specializations"
+  [ngModel]="value"
+  (onChange)="onValueChange($event.value)"
+  optionLabel="name"
+  optionValue="_id"
+  placeholder="Select Specialization"
+  class="w-full">
+</p-dropdown>

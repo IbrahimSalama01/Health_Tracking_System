@@ -12,7 +12,7 @@ import { PatientService } from '../../patient.service';
 export class PrevDoctorsComponent {
   private patientService = inject(PatientService);
   doctors = this.patientService.oldDoctors;
-  ngOnInit(){
+  ngOnInit() {
     this.patientService.fetchDoctors();
   }
 }

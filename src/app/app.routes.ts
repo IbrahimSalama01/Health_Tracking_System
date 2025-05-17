@@ -6,48 +6,51 @@ import { patientGuard } from './Features/Dashboard/Patient/patient.guard';
 import { doctorGuard } from './Features/Dashboard/Doctor/doctor.guard';
 import { loggedInGuard } from './Core/Auth/logged-in.guard';
 export const routes: Routes = [
-
-  { path: '', component: MainLayoutComponent, children: [
-    {
-      path: '',
-      component: LandingPageComponent
-    },
-    {
-      path: 'contact-us',
-      loadComponent: () =>
-        import('./Features/contact-us/contact-us.component').then(
-          c => c.ContactUsComponent
-        ),
-    },
-    {
-      path: 'privacy-policy',
-      loadComponent: () =>
-        import('./Features/privacy-policy/privacy-policy.component').then(
-          c => c.PrivacyPolicyComponent
-        ),
-    },
-  ]
+  {
+    path: '',
+    component: MainLayoutComponent,
+    children: [
+      {
+        path: '',
+        component: LandingPageComponent,
+      },
+      {
+        path: 'contact-us',
+        loadComponent: () =>
+          import('./Features/contact-us/contact-us.component').then(
+            c => c.ContactUsComponent
+          ),
+      },
+      {
+        path: 'privacy-policy',
+        loadComponent: () =>
+          import('./Features/privacy-policy/privacy-policy.component').then(
+            c => c.PrivacyPolicyComponent
+          ),
+      },
+    ],
   },
   {
     path: 'signup',
     loadComponent: () =>
       import('./Core/Auth/signup/signup.component').then(
-        c => c.SignupComponent),
-        canActivate:[loggedInGuard]
+        c => c.SignupComponent
+      ),
+    canActivate: [loggedInGuard],
   },
   {
     path: 'login',
     loadComponent: () =>
-      import('./Core/Auth/login/login.component').then(
-        c => c.LoginComponent),
-        canActivate:[loggedInGuard]
+      import('./Core/Auth/login/login.component').then(c => c.LoginComponent),
+    canActivate: [loggedInGuard],
   },
   {
     path: 'forgot-password',
     loadComponent: () =>
       import('./Core/Auth/forgot-password/forgot-password.component').then(
-        c => c.ForgotPasswordComponent),
-        canActivate:[loggedInGuard]
+        c => c.ForgotPasswordComponent
+      ),
+    canActivate: [loggedInGuard],
   },
   {
     path: 'dashboard',
@@ -55,7 +58,7 @@ export const routes: Routes = [
       import('./Features/Dashboard/dashboard/dashboard.component').then(
         c => c.DashboardComponent
       ),
-    canActivate: [authGuard,patientGuard],
+    canActivate: [authGuard, patientGuard],
     children: [
       {
         path: '',
@@ -66,6 +69,22 @@ export const routes: Routes = [
       },
       {
         path: 'checkups',
+        children: [
+          {
+            path: 'my-checkups',
+            loadComponent: () =>
+              import(
+                './Features/Dashboard/Patient/checkups/my-checkups/my-checkups.component'
+              ).then(c => c.MyCheckupsComponent),
+          },
+          {
+            path: 'doctors-checkups',
+            loadComponent: () =>
+              import(
+                './Features/Dashboard/Patient/checkups/doctors-checkups/doctors-checkups.component'
+              ).then(c => c.DoctorsCheckupsComponent),
+          },
+        ],
         loadComponent: () =>
           import(
             './Features/Dashboard/Patient/checkups/checkups.component'
@@ -102,26 +121,39 @@ export const routes: Routes = [
         ],
       },
       {
-    path: 'doctor',
-    children: [
-      {
-        path: '',
-        loadComponent: () =>
-          import('./Features/Dashboard/Doctor/statistics/statistics.component').then(c => c.StatisticsComponent),
+        path: 'doctor',
+        children: [
+          {
+            path: '',
+            loadComponent: () =>
+              import(
+                './Features/Dashboard/Doctor/statistics/statistics.component'
+              ).then(c => c.StatisticsComponent),
+          },
+          {
+            path: 'current-patients',
+            loadComponent: () =>
+              import(
+                './Features/Dashboard/Doctor/current-patients/current-patients.component'
+              ).then(c => c.CurrentPatientsComponent),
+            canActivate: [doctorGuard],
+          },
+          {
+            path: 'patient-details/:id',
+            loadComponent: () =>
+              import(
+                './Features/Dashboard/Doctor/patient-details/patient-details/patient-details.component'
+              ).then(c => c.PatientDetailsComponent),
+          },
+          {
+            path: 'new-checkup/:id',
+            loadComponent: () =>
+              import(
+                './Features/Dashboard/Doctor/new-checkup/new-checkup.component'
+              ).then(c => c.NewCheckupComponent),
+          }
+        ],
       },
-      {
-        path: 'current-patients',
-        loadComponent: () =>
-          import('./Features/Dashboard/Doctor/current-patients/current-patients.component').then(c => c.CurrentPatientsComponent),
-        canActivate: [doctorGuard],
-      },
-      {
-        path: 'patientdetails/:id',
-        loadComponent: () =>
-          import('./Features/Dashboard/Doctor/patient-details/patient-details/patient-details.component').then(c => c.PatientDetailsComponent),
-      }
-    ]
-    },
     ],
   },
 ];

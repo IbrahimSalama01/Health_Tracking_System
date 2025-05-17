@@ -15,8 +15,8 @@
 
       <ng-template #footer>
         <div class="flex gap-2 mt-3">
-          <p-button label="New Checkup" icon="pi pi-plus" styleClass="w-full" />
-          <p-button (click) = "viewPatient(patient._id)" label="View profile" icon="pi pi-eye" styleClass="w-full p-button-info" />
+          <p-button [routerLink]="['/dashboard/doctor/new-checkup', patient._id]" routerLinkActive="router-link-active" label="New Checkup" icon="pi pi-plus" styleClass="w-full" />
+          <p-button [routerLink]="['/dashboard/doctor/patient-details', patient._id]" routerLinkActive="router-link-active" label="View profile" icon="pi pi-eye" styleClass="w-full p-button-info" />
         </div>
       </ng-template>
     </p-card>

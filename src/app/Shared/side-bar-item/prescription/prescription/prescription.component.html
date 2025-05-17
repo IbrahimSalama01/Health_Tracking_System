@@ -1,0 +1,42 @@
+<p-dialog 
+  [(visible)]="visible" 
+  [modal]="true" 
+  [closable]="false"
+  [style]="{ width: '50vw', height: '80vh' }" 
+  header="Prescription"
+  class="rounded-2xl">
+
+  <div class="overflow-auto h-full pr-2">
+    <form [formGroup]="prescriptionForm" class="space-y-6 pb-6">
+
+      <div>
+        <label for="date" class="block text-sm font-medium text-gray-700">Date</label>
+        <p-calendar id="date" formControlName="date" showIcon dateFormat="yy-mm-dd" class="w-full" />
+      </div>
+
+      <div formArrayName="treatments" class="space-y-4">
+        <div *ngFor="let treatment of treatments.controls; let i = index" [formGroupName]="i" class="p-4 bg-gray-100 rounded-xl">
+          <div class="grid grid-cols-2 gap-4">
+            <input pInputText placeholder="Name" formControlName="name" class="w-full" />
+            <input pInputText placeholder="Concentration" formControlName="concentration" class="w-full" />
+            <input pInputText placeholder="Dose" formControlName="dose" class="w-full" />
+            <input pInputText placeholder="Frequency" formControlName="frequency" class="w-full" />
+            <input pInputText placeholder="Duration" formControlName="duration" class="w-full" />
+            <input pInputText placeholder="Notes (optional)" formControlName="notes" class="w-full" />
+          </div>
+          <button pButton type="button" label="Remove" icon="pi pi-trash" class="mt-2 bg-red-500 hover:bg-red-600" (click)="removeTreatment(i)"></button>
+        </div>
+      </div>
+
+      <button pButton type="button" label="Add Treatment" icon="pi pi-plus" class="bg-blue-500 hover:bg-blue-600" (click)="addTreatment()"></button>
+    </form>
+  </div>
+
+  <ng-template pTemplate="footer">
+    <div class="flex justify-end gap-4">
+      <button pButton label="Cancel" class="bg-gray-400 hover:bg-gray-500" (click)="cancel()"></button>
+      <button pButton label="Save" class="bg-green-500 hover:bg-green-600" (click)="save()" [disabled]="prescriptionForm.invalid"></button>
+    </div>
+  </ng-template>
+
+</p-dialog>
