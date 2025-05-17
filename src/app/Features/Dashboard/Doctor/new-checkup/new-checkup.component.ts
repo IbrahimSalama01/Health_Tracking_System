@@ -12,8 +12,11 @@ import { ToastModule } from 'primeng/toast';
 import { TextareaModule } from 'primeng/textarea';
 import { SpecializationComponent } from '../../../../Shared/side-bar-item/specializations/specialization/specialization.component';
 import { DoctorService } from '../services/doctor.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../../../../Core/services/auth/auth.service';
+import { Prescription } from '../../../../utils/Interfaces';
+import { PrescriptionComponent } from '../../../../Shared/side-bar-item/prescription/prescription/prescription.component';
+import { PrescriptionService } from '../../../../Shared/side-bar-item/prescription/prescription/prescription.service';
 
 @Component({
   selector: 'app-new-checkup',
@@ -33,12 +36,15 @@ import { AuthService } from '../../../../Core/services/auth/auth.service';
     ToastModule,
     TextareaModule,
     SpecializationComponent,
+    PrescriptionComponent
   ]
 })
 export class NewCheckupComponent implements OnInit {
   private authService = inject(AuthService)
   private doctorService = inject(DoctorService)
+  private prescriptionService = inject(PrescriptionService)
   private route = inject(ActivatedRoute);
+  private router = inject(Router);
   currentUser: any; 
   checkupForm: FormGroup = new FormGroup({
     type: new FormControl('checkup', Validators.required),
@@ -49,7 +55,8 @@ export class NewCheckupComponent implements OnInit {
     diagnosis: new FormControl(''),
     doctorRecommendations: new FormControl(''),
   });
-
+  prescription: Prescription | null = null;
+  showPrescriptionModal = false;
   types = [
     { label: 'Checkup', value: 'checkup' },
     { label: 'Follow-up', value: 'follow-up' }
@@ -59,32 +66,62 @@ export class NewCheckupComponent implements OnInit {
       this.currentUser = user;
     });
   }
+
+  handlePrescriptionSave(savedPrescription: Prescription) {
+    this.prescription = savedPrescription;
+    this.showPrescriptionModal = false;
+    console.log('Saved prescription:', savedPrescription);
+  }
+
   
   submit(): void {
-    const doctorId = this.currentUser?.doctor?._id;
-    const createdBy = this.currentUser?._id;
-    const patientId = this.route.snapshot.params['id'];
+  const doctorId = this.currentUser?.doctor?._id;
+  const createdBy = this.currentUser?._id;
+  const patientId = this.route.snapshot.params['id'];
 
-    const payload = {
-      ...this.checkupForm.value,
-      patientId,
-      doctorId,
-      createdBy,
-    };
-    if(this.checkupForm.valid) {
-      this .doctorService.addCheckup(payload).subscribe({
-        next: (data) => {
-          console.log( data);
-        },
-        error: (error) => {
-          console.error('Error adding checkup:', error);
-        },
-        complete: () => {
-          console.log('Checkup added successfully!');
+  const checkupPayload = {
+    ...this.checkupForm.value,
+    patientId,
+    doctorId,
+    createdBy,
+  };
+
+  if (this.checkupForm.valid) {
+    this.doctorService.addCheckup(checkupPayload).subscribe({
+      next: (checkupResponse) => {
+        console.log('Checkup response:', checkupResponse);
+
+        if (this.prescription) {
+          const prescriptionPayload = {
+            ...this.prescription,
+            checkupId: checkupResponse._id,
+            doctorId,
+            patientId,
+          };
+          this.prescriptionService.addPrescription(prescriptionPayload).subscribe({
+            next: (prescriptionResponse) => {
+              console.log('Prescription response:', prescriptionResponse);
+            },
+            error: (error) => {
+              console.error('Error adding prescription:', error);
+            },
+            complete: () => {
+              console.log('Prescription added successfully!');
+            }
+          });
         }
-      })
-    }else{
-      this.checkupForm.markAllAsTouched();
-    }
+      },
+      error: (error) => {
+        console.error('Error adding checkup:', error);
+      },
+      complete: () => {
+        console.log('Checkup added successfully!');
+        this.router.navigate(['/dashboard/doctor/current-patients']);
+      }
+    });
+  } else {
+    this.checkupForm.markAllAsTouched();
   }
+}
+
 }
