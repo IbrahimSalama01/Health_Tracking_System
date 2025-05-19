@@ -19,8 +19,8 @@ import { MessageService } from 'primeng/api';
 
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth/auth.service';
-import { SpecializationService } from '../../services/auth/specialization.service';
 import { inject } from '@angular/core';
+import { SpecializationComponent } from '../../../Shared/side-bar-item/specializations/specialization/specialization.component';
 
 @Component({
   selector: 'app-signup',
@@ -39,7 +39,8 @@ import { inject } from '@angular/core';
     MessageModule,
     DropdownModule,
     InputNumberModule,
-    ToastModule
+    ToastModule,
+    SpecializationComponent
   ],
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.css'],
@@ -48,7 +49,6 @@ import { inject } from '@angular/core';
 export class SignupComponent implements OnInit {
   constructor(
     private authService: AuthService,
-    private specializationService: SpecializationService,
     private messageService: MessageService
   ) {}
 
@@ -74,7 +74,7 @@ export class SignupComponent implements OnInit {
     profileImage: new FormControl(null),
     agreeTerms: new FormControl(false, Validators.requiredTrue),
     doctorInfo: new FormGroup({
-      specialization: new FormControl(null, []),
+      specialization: new FormControl(null),
       bio: new FormControl('', []),
       experience: new FormControl(null, []),
       clinicAddress: new FormGroup({
@@ -99,35 +99,8 @@ export class SignupComponent implements OnInit {
 
   // Implement ngOnInit
   ngOnInit(): void {
-  this.fetchSpecializations();
+  // this.fetchSpecializations();
 }
-
-fetchSpecializations(): void {
-  this.isLoading = true;
-  this.specializationService.getSpecializations().subscribe({
-    next: (specializations) => {
-      this.specializations = specializations.map(spec => ({
-        label: spec.name,
-        value: spec.id
-      }));
-      this.isLoading = false;
-    },
-    error: (err) => {
-      console.error('Failed to fetch specializations:', err);
-      this.isLoading = false;
-      // Only show toast if in browser
-      if (typeof window !== 'undefined') {
-        this.messageService.add({
-          severity: 'error',
-          summary: 'Error',
-          detail: 'Failed to load specializations. Please try again later.',
-          life: 5000
-        });
-      }
-    }
-  });
-}
-
   get certificates(): FormArray {
     return this.form.get('doctorInfo.certificates') as FormArray;
   }
@@ -229,9 +202,9 @@ fetchSpecializations(): void {
           this.isLoading = false;
         },
         error: (err) => {
-          console.error('Registration failed:', err);
+          console.log('Registration failed:', err);
           this.isLoading = false;
-          
+
           // Handle duplicate entry errors
           if (err.error && err.error.message) {
             if (err.error.message.includes('email')) {
@@ -242,7 +215,7 @@ fetchSpecializations(): void {
                 life: 5000
               });
               this.form.get('email')?.setErrors({ duplicate: true });
-            } 
+            }
             else if (err.error.message.includes('phone')) {
               this.messageService.add({
                 severity: 'error',
@@ -295,4 +268,7 @@ fetchSpecializations(): void {
   getCertificateControl(index: number): FormGroup {
     return this.certificates.at(index) as FormGroup;
   }
+  getCertificateNameControl(i: number): FormControl {
+  return this.getCertificateControl(i).get('name') as FormControl;
+}
 }
