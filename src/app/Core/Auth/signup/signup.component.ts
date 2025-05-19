@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators, ReactiveFormsModule, FormArray } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
+// PrimeNG modules
 import { InputTextModule } from 'primeng/inputtext';
 import { PasswordModule } from 'primeng/password';
 import { CheckboxModule } from 'primeng/checkbox';
@@ -13,9 +14,14 @@ import { FileUploadModule } from 'primeng/fileupload';
 import { MessageModule } from 'primeng/message';
 import { DropdownModule } from 'primeng/dropdown';
 import { InputNumberModule } from 'primeng/inputnumber';
+import { ToastModule } from 'primeng/toast';
+import { MessageService } from 'primeng/api';
+
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth/auth.service';
+import { SpecializationService } from '../../services/auth/specialization.service';
 import { inject } from '@angular/core';
+
 @Component({
   selector: 'app-signup',
   standalone: true,
@@ -32,14 +38,22 @@ import { inject } from '@angular/core';
     FileUploadModule,
     MessageModule,
     DropdownModule,
-    InputNumberModule
+    InputNumberModule,
+    ToastModule
   ],
   templateUrl: './signup.component.html',
-  styleUrls: ['./signup.component.css']
+  styleUrls: ['./signup.component.css'],
+  providers: [MessageService]
 })
-export class SignupComponent {
-  constructor(private authService: AuthService) {}
+export class SignupComponent implements OnInit {
+  constructor(
+    private authService: AuthService,
+    private specializationService: SpecializationService,
+    private messageService: MessageService
+  ) {}
+
   private router = inject(Router);
+  isLoading = false; // Add loading state
   form: FormGroup = new FormGroup({
     firstName: new FormControl('', [Validators.required, Validators.pattern(/^[a-zA-Z]+$/)]),
     lastName: new FormControl('', [Validators.required, Validators.pattern(/^[a-zA-Z]+$/)]),
@@ -50,7 +64,7 @@ export class SignupComponent {
     role: new FormControl(null, Validators.required),
     password: new FormControl('', [
       Validators.required,
-      Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/)
+      Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/)
     ]),
     confirmPassword: new FormControl('', Validators.required),
     street: new FormControl(''),
@@ -81,13 +95,38 @@ export class SignupComponent {
     { label: 'Doctor', value: 'doctor' },
   ];
 
-  specializations = [
-    { label: 'Cardiology', value: 'cardiology' },
-    { label: 'Dermatology', value: 'dermatology' },
-    { label: 'Neurology', value: 'neurology' },
-    { label: 'Pediatrics', value: 'pediatrics' },
-    { label: 'Orthopedics', value: 'orthopedics' }
-  ];
+  specializations: { label: string, value: string }[] = [];
+
+  // Implement ngOnInit
+  ngOnInit(): void {
+  this.fetchSpecializations();
+}
+
+fetchSpecializations(): void {
+  this.isLoading = true;
+  this.specializationService.getSpecializations().subscribe({
+    next: (specializations) => {
+      this.specializations = specializations.map(spec => ({
+        label: spec.name,
+        value: spec.id
+      }));
+      this.isLoading = false;
+    },
+    error: (err) => {
+      console.error('Failed to fetch specializations:', err);
+      this.isLoading = false;
+      // Only show toast if in browser
+      if (typeof window !== 'undefined') {
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Error',
+          detail: 'Failed to load specializations. Please try again later.',
+          life: 5000
+        });
+      }
+    }
+  });
+}
 
   get certificates(): FormArray {
     return this.form.get('doctorInfo.certificates') as FormArray;
@@ -130,67 +169,129 @@ export class SignupComponent {
   }
 
   submitForm() {
-  if (this.form.valid) {
-    const formValue = this.form.value;
+    if (this.form.valid) {
+      this.isLoading = true;
+      const formValue = this.form.value;
 
-    const formData = new FormData();
+      const formData = new FormData();
 
-    // Basic user info
-    formData.append('firstName', formValue.firstName);
-    formData.append('lastName', formValue.lastName);
-    formData.append('email', formValue.email);
-    formData.append('nationalId', formValue.nationalId);
-    formData.append('phone', formValue.phone);
-    formData.append('dateOfBirth', formValue.dateOfBirth);
-    formData.append('role', formValue.role);
-    formData.append('password', formValue.password);
-    formData.append('street', formValue.street || '');
-    formData.append('city', formValue.city || '');
-    formData.append('state', formValue.state || '');
-    formData.append('country', formValue.country || '');
+      // Basic user info
+      formData.append('firstName', formValue.firstName);
+      formData.append('lastName', formValue.lastName);
+      formData.append('email', formValue.email);
+      formData.append('nationalId', formValue.nationalId);
+      formData.append('phone', formValue.phone);
+      formData.append('dateOfBirth', formValue.dateOfBirth);
+      formData.append('role', formValue.role);
+      formData.append('password', formValue.password);
+      formData.append('street', formValue.street || '');
+      formData.append('city', formValue.city || '');
+      formData.append('state', formValue.state || '');
+      formData.append('country', formValue.country || '');
 
-    // Profile image
-    if (formValue.profileImage) {
-      formData.append('profileImage', formValue.profileImage);
-    }
+      // Profile image
+      if (formValue.profileImage) {
+        formData.append('profileImage', formValue.profileImage);
+      }
 
-    // Doctor-specific info if role is doctor
-    if (formValue.role === 'doctor') {
-      const doctorInfo = formValue.doctorInfo;
+      // Doctor-specific info if role is doctor
+      if (formValue.role === 'doctor') {
+        const doctorInfo = formValue.doctorInfo;
 
-      formData.append('specialization', doctorInfo.specialization || '');
-      formData.append('bio', doctorInfo.bio || '');
-      formData.append('experience', doctorInfo.experience?.toString() || '');
+        formData.append('specialization', doctorInfo.specialization || '');
+        formData.append('bio', doctorInfo.bio || '');
+        formData.append('experience', doctorInfo.experience?.toString() || '');
 
-      formData.append('clinicStreet', doctorInfo.clinicAddress.street || '');
-      formData.append('clinicCity', doctorInfo.clinicAddress.city || '');
-      formData.append('clinicState', doctorInfo.clinicAddress.state || '');
-      formData.append('clinicCountry', doctorInfo.clinicAddress.country || '');
+        formData.append('clinicStreet', doctorInfo.clinicAddress.street || '');
+        formData.append('clinicCity', doctorInfo.clinicAddress.city || '');
+        formData.append('clinicState', doctorInfo.clinicAddress.state || '');
+        formData.append('clinicCountry', doctorInfo.clinicAddress.country || '');
 
-      doctorInfo.certificates.forEach((cert: any, index: number) => {
-        formData.append(`certificates[${index}][name]`, cert.name);
-        formData.append(`certificates[${index}][copy]`, cert.copy);
+        doctorInfo.certificates.forEach((cert: any, index: number) => {
+          formData.append(`certificates[${index}][name]`, cert.name);
+          formData.append(`certificates[${index}][copy]`, cert.copy);
+        });
+      }
+
+      // Call the API
+      this.authService.register(formData).subscribe({
+        next: (response) => {
+          console.log('Registration successful:', response);
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Success',
+            detail: 'Registration successful! Redirecting to login...',
+            life: 3000
+          });
+          setTimeout(() => {
+            this.router.navigate(['/login']);
+          }, 3000);
+          this.isLoading = false;
+        },
+        error: (err) => {
+          console.error('Registration failed:', err);
+          this.isLoading = false;
+          
+          // Handle duplicate entry errors
+          if (err.error && err.error.message) {
+            if (err.error.message.includes('email')) {
+              this.messageService.add({
+                severity: 'error',
+                summary: 'Error',
+                detail: 'This email is already registered',
+                life: 5000
+              });
+              this.form.get('email')?.setErrors({ duplicate: true });
+            } 
+            else if (err.error.message.includes('phone')) {
+              this.messageService.add({
+                severity: 'error',
+                summary: 'Error',
+                detail: 'This phone number is already registered',
+                life: 5000
+              });
+              this.form.get('phone')?.setErrors({ duplicate: true });
+            }
+            else if (err.error.message.includes('nationalId')) {
+              this.messageService.add({
+                severity: 'error',
+                summary: 'Error',
+                detail: 'This national ID is already registered',
+                life: 5000
+              });
+              this.form.get('nationalId')?.setErrors({ duplicate: true });
+            }
+            else {
+              // Generic error message
+              this.messageService.add({
+                severity: 'error',
+                summary: 'Error',
+                detail: 'Registration failed: ' + err.error.message,
+                life: 5000
+              });
+            }
+          } else {
+            // Network or server error
+            this.messageService.add({
+              severity: 'error',
+              summary: 'Error',
+              detail: 'Registration failed. Please try again later.',
+              life: 5000
+            });
+          }
+        }
+      });
+    } else {
+      this.form.markAllAsTouched();
+      this.messageService.add({
+        severity: 'warn',
+        summary: 'Warning',
+        detail: 'Please fill all required fields correctly',
+        life: 5000
       });
     }
-
-    // Call the API
-    this.authService.register(formData).subscribe({
-      next: (response) => {
-        console.log('Registration successful:', response);
-        // Optionally, redirect the user or show a success message
-        this.router.navigate(['/login']);
-      },
-      error: (err) => {
-        console.error('Registration failed:', err);
-        // Optionally, show error messages in the UI
-      }
-    });
-  } else {
-    this.form.markAllAsTouched();
   }
-}
 
-  // Helper method to get certificate control
   getCertificateControl(index: number): FormGroup {
     return this.certificates.at(index) as FormGroup;
   }

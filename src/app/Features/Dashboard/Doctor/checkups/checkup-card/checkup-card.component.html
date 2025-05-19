@@ -1,0 +1,21 @@
+<div class="grid gap-2 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+@for (checkup of checkups(); track checkup._id){
+    <p-card [style]="{ width: '22rem', overflow: 'hidden' }">
+      <ng-template #title>
+        {{ checkup?.patientId?.userId?.firstName }} {{ checkup?.patientId?.userId?.lastName }}
+      </ng-template>
+
+      <ng-template #subtitle>
+        Date: {{ checkup?.checkupDate | date }}
+      </ng-template>
+
+      <p class="mt-2">Type: {{ checkup?.type }}</p>
+
+      <ng-template #footer>
+        <div class="flex gap-2 mt-3">
+          <p-button [routerLink]="['/dashboard/doctor/checkup-details', checkup._id]" routerLinkActive="router-link-active" label="View" icon="pi pi-eye" styleClass="w-full" />
+        </div>
+      </ng-template>
+    </p-card>
+  }
+</div>

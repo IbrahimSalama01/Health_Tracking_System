@@ -34,7 +34,12 @@ export class DoctorService {
     return this._httpClient.post<any>(`${this.apiUrlCheckups}`, data, {
       headers: this.getHeaders()
     })
-  
+  }
+
+  getCheckups(): Observable<any> {
+    return this._httpClient.get<any>(`${this.apiUrlCheckups}`, { 
+      headers: this.getHeaders() 
+    });
   }
 
 }
