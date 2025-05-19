@@ -1,4 +1,6 @@
 <div class="min-h-screen bg-gradient-to-b from-blue-50 to-indigo-100 flex items-center justify-center p-4">
+  <!-- the toast container -->
+  <p-toast position="top-center"></p-toast>
   <div class="w-full max-w-5xl bg-white rounded-xl shadow-2xl overflow-hidden">
     <div class="bg-gradient-to-r from-emerald-600 to-teal-700 p-8 text-center">
       <h1 class="text-4xl font-bold text-white">Create Your Account</h1>
@@ -109,8 +111,7 @@
 
         <div class="md:col-span-2">
           <label class="block text-sm font-medium text-gray-700 mb-1">Bio *</label>
-          <textarea pInputTextarea formControlName="doctorInfo.bio" class="w-full" rows="3"
-                    placeholder="Tell us about your professional background"></textarea>
+          <input pInputText formControlName="doctorInfo.bio" class="w-full" placeholder="Tell us about your professional background" />
           @if (form.get('doctorInfo.bio')?.invalid && form.get('doctorInfo.bio')?.touched) {
             <small class="text-red-500 block mt-1">Bio is required</small>
           }
@@ -165,7 +166,8 @@
 
                 <div class="mb-3">
                   <label class="block text-sm font-medium text-gray-700 mb-1">Certificate Name *</label>
-                  <!-- <textarea pInputTextarea [formControl]="getCertificateControl(i).get('name')" class="w-full" placeholder="Certificate name"></textarea> -->
+                  <input pInputText formControlName="getCertificateControl(i).get('name')" class="w-full" placeholder="Certificate name" />
+
                   @if (getCertificateControl(i).get('name')?.invalid && getCertificateControl(i).get('name')?.touched) {
                     <small class="text-red-500 block mt-1">Certificate name is required</small>
                   }
